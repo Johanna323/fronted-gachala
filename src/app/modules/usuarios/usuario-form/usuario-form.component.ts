@@ -107,6 +107,13 @@ export class UsuarioFormComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
+    
+    const formValue = { ...this.form.value };
+    if (formValue.fecha_nacimiento) {
+      const date = new Date(formValue.fecha_nacimiento);
+      formValue.fecha_nacimiento = date.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+    }
+    
     this.dialogRef.close(this.form.value);
   }
 
