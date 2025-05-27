@@ -1,0 +1,41 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-4">
+  <h2 mat-dialog-title>{{ data?.permiso ? 'Editar Permiso' : 'Crear Permiso' }}</h2>
+
+  <mat-dialog-content class="w-100">
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Nombre del Permiso</mat-label>
+      <input matInput formControlName="nombre" required>
+      <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+        El nombre del permiso es requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descripcion" required></textarea>
+      <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
+        La descripción es requerida
+      </mat-error>
+      <mat-error *ngIf="form.get('descripcion')?.hasError('maxlength')">
+        La descripción no debe exceder los 255 caracteres
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Rutas de Menú</mat-label>
+      <mat-select formControlName="ruta" multiple required>
+        <mat-option *ngFor="let ruta of rutas" [value]="ruta">{{ ruta }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('ruta')?.hasError('required')">
+        Seleccione al menos una ruta
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+      {{ data?.permiso ? 'Actualizar' : 'Guardar' }}
+    </button>
+  </mat-dialog-actions>
+</form>

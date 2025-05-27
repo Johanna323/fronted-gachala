@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>Gestión de Permisos</h2>
+
+  <div class="actions-container">
+    <button mat-raised-button color="primary" (click)="openCreateDialog()" class="create-btn">
+      <mat-icon>add</mat-icon> Crear Permiso
+    </button>
+  </div>
+
+  <div class="table-container">
+    
+    <table mat-table [dataSource]="permisos" *ngIf="permisos.length > 0" class="mat-elevation-z8">
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let permiso">{{ permiso.nombre }}</td>
+      </ng-container>
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef>Descripción</th>
+        <td mat-cell *matCellDef="let permiso">{{ permiso.descripcion }}</td>
+      </ng-container>
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let permiso; let i = index">
+          <button mat-icon-button (click)="edit(i)" class="edit-btn">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="delete(i)" class="delete-btn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <div class="no-data" *ngIf="permisos.length === 0">
+      No hay permisos registrados
+    </div>
+  </div>
+</div> 

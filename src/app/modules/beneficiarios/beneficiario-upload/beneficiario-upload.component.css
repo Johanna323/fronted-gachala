@@ -1,0 +1,73 @@
+.form-container {
+  padding: 20px;
+}
+
+.upload-field {
+  margin-bottom: 24px;
+}
+
+.upload-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.file-input-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.file-name {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+mat-progress-bar {
+  margin-top: 16px;
+}
+
+mat-dialog-content {
+  min-width: 400px;
+  max-width: 600px;
+}
+
+mat-dialog-actions {
+  padding: 16px 0;
+  margin: 0;
+}
+
+h2[mat-dialog-title] {
+  margin: 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .form-container {
+    padding: 16px;
+  }
+
+  mat-dialog-content {
+    min-width: 100%;
+    padding: 0;
+  }
+
+  .file-input-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+}

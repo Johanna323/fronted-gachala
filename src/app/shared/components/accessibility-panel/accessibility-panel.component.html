@@ -1,0 +1,20 @@
+<div class="barra-accesibilidad-govco">
+  <button id="botoncontraste" class="acces-btn" (click)="toggleContrast()">
+    <span class="acces-btn-icon">
+      <i class="bi bi-circle-half"></i>
+    </span>
+    <span id="titlecontraste" class="govco-tooltip">Contraste</span>
+  </button>
+  <button id="botondisminuir" class="acces-btn" (click)="decreaseFontSize()">
+    <span class="acces-btn-icon">
+      <i class="bi bi-type"></i><span style="font-size:0.8em; margin-left:-6px;position: relative;top: -10px;right: -1px;">-</span>
+    </span>
+    <span id="titledisminuir" class="govco-tooltip">Reducir letra</span>
+  </button>
+  <button id="botonaumentar" class="acces-btn" (click)="increaseFontSize()">
+    <span class="acces-btn-icon">
+      <i class="bi bi-type"></i><span style="font-size:0.8em; margin-left:-6px;position: relative;top: -10px;right: -1px;">+</span>
+    </span>
+    <span id="titleaumentar" class="govco-tooltip">Aumentar letra</span>
+  </button>
+</div>

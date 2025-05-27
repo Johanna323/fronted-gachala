@@ -1,0 +1,179 @@
+<div class="container">
+  <mat-card class="bg-white">
+    <mat-card-header>
+      <mat-card-title>Perfil de Usuario</mat-card-title>
+      <div class="header-actions">
+        <button mat-icon-button color="primary" (click)="toggleEdit()" *ngIf="!loading">
+          <mat-icon>{{isEditing ? 'close' : 'edit'}}</mat-icon>
+        </button>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content class="bg-white">
+      <div *ngIf="loading" class="loading-container">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Cargando datos del usuario...</p>
+      </div>
+
+      <div *ngIf="error" class="error-message">
+        {{ error }}
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="save()" *ngIf="!loading">
+        <div class="form-section">
+          <h3>Información Personal</h3>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Primer Nombre</mat-label>
+              <input matInput formControlName="primer_nombre" required>
+              <mat-error *ngIf="form.get('primer_nombre')?.hasError('required')">
+                El primer nombre es requerido
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Segundo Nombre</mat-label>
+              <input matInput formControlName="segundo_nombre">
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Primer Apellido</mat-label>
+              <input matInput formControlName="primer_apellido" required>
+              <mat-error *ngIf="form.get('primer_apellido')?.hasError('required')">
+                El primer apellido es requerido
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Segundo Apellido</mat-label>
+              <input matInput formControlName="segundo_apellido">
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Correo Electrónico</mat-label>
+              <input matInput formControlName="correo" type="email" required>
+              <mat-error *ngIf="form.get('correo')?.hasError('required')">
+                El correo es requerido
+              </mat-error>
+              <mat-error *ngIf="form.get('correo')?.hasError('email')">
+                Ingrese un correo electrónico válido
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Teléfono</mat-label>
+              <input matInput formControlName="telefono" required>
+              <mat-error *ngIf="form.get('telefono')?.hasError('required')">
+                El teléfono es requerido
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Tipo de Documento</mat-label>
+              <mat-select formControlName="tipo_documento_id" required>
+                <mat-option value="">Seleccione un tipo</mat-option>
+                <mat-option *ngFor="let tipo of tiposDocumento" [value]="tipo.id">
+                  {{tipo.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.get('tipo_documento_id')?.hasError('required')">
+                El tipo de documento es requerido
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Número de Documento</mat-label>
+              <input matInput formControlName="numero_documento" required>
+              <mat-error *ngIf="form.get('numero_documento')?.hasError('required')">
+                El número de documento es requerido
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="form-section">
+          <h3>Ubicación</h3>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Dirección</mat-label>
+            <input matInput formControlName="direccion" required>
+            <mat-error *ngIf="form.get('direccion')?.hasError('required')">
+              La dirección es requerida
+            </mat-error>
+          </mat-form-field>
+
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Municipio</mat-label>
+              <input matInput formControlName="municipio" required>
+              <mat-error *ngIf="form.get('municipio')?.hasError('required')">
+                El municipio es requerido
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Departamento</mat-label>
+              <input matInput formControlName="departamento" required>
+              <mat-error *ngIf="form.get('departamento')?.hasError('required')">
+                El departamento es requerido
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>País</mat-label>
+            <input matInput formControlName="pais" required>
+            <mat-error *ngIf="form.get('pais')?.hasError('required')">
+              El país es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="form-section">
+          <h3>Información Adicional</h3>
+          <div class="form-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Fecha de Nacimiento</mat-label>
+              <input matInput formControlName="fecha_nacimiento" type="date" required>
+              <mat-error *ngIf="form.get('fecha_nacimiento')?.hasError('required')">
+                La fecha de nacimiento es requerida
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Género</mat-label>
+              <mat-select formControlName="genero_id" required>
+                <mat-option value="">Seleccione un género</mat-option>
+                <mat-option *ngFor="let genero of generos" [value]="genero.id">
+                  {{genero.nombre}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.get('genero_id')?.hasError('required')">
+                El género es requerido
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <mat-checkbox formControlName="activo" color="primary">
+            Cuenta Activa
+          </mat-checkbox>
+        </div>
+
+        <div class="form-actions" *ngIf="isEditing">
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+            Guardar Cambios
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> 

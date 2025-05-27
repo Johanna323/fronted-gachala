@@ -1,0 +1,51 @@
+<div class="form-container">
+  <h2 mat-dialog-title>{{ data?.kit ? 'Editar' : 'Crear' }} Kit de Inventario</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+      <div class="form-grid">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Nombre del Kit</mat-label>
+          <input matInput formControlName="nombre_kit" required>
+          <mat-error *ngIf="form.get('nombre_kit')?.hasError('required')">
+            El nombre es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="descripcion" rows="3" required></textarea>
+          <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
+            La descripción es requerida
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Cantidad Disponible</mat-label>
+          <input matInput type="number" formControlName="cantidad_disponible" min="0" required>
+          <mat-error *ngIf="form.get('cantidad_disponible')?.hasError('required')">
+            La cantidad es requerida
+          </mat-error>
+          <mat-error *ngIf="form.get('cantidad_disponible')?.hasError('min')">
+            La cantidad debe ser mayor o igual a 0
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Fecha de Actualización</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fecha_actualizacion" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="form.get('fecha_actualizacion')?.hasError('required')">
+            La fecha es requerida
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button type="button" (click)="onCancel()" [disabled]="loading">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || loading">
+        {{ data?.kit ? 'Actualizar' : 'Crear' }}
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

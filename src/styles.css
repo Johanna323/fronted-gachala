@@ -1,0 +1,113 @@
+@import "tailwindcss";
+/* You can add global styles to this file, and also import other style files */
+
+/* Your custom styles below */
+
+/* Tema oscuro */
+body.theme-dark {
+  background: #181a1b !important;
+  color: #f1f1f1 !important;
+}
+
+body.theme-dark .barra-accesibilidad-govco {
+  background: #222e3a !important;
+}
+
+body.theme-dark .acces-btn-icon {
+  background: #333 !important;
+  color: #fff !important;
+}
+
+body.theme-dark .govco-tooltip {
+  background: #222e3a !important;
+  color: #fff !important;
+}
+
+body.theme-dark main,
+body.theme-dark .main,
+body.theme-dark .content,
+body.theme-dark .container,
+body.theme-dark .card,
+body.theme-dark .table {
+  background: #23272b !important;
+  color: #f1f1f1 !important;
+}
+
+body.theme-dark .sidebar,
+body.theme-dark .menu,
+body.theme-dark .app-menu {
+  background: #1a1d20 !important;
+  color: #f1f1f1 !important;
+}
+
+body.theme-dark .header,
+body.theme-dark .app-header {
+  background: #181a1b !important;
+  color: #f1f1f1 !important;
+}
+
+body.theme-dark .table th,
+body.theme-dark .table td {
+  background: #23272b !important;
+  color: #f1f1f1 !important;
+}
+
+body.theme-dark a {
+  color: #4dd0e1 !important;
+}
+
+/* Tema claro */
+body.theme-light {
+  background: #fff !important;
+  color: #222 !important;
+}
+
+body.theme-light .barra-accesibilidad-govco {
+  background: #004884 !important;
+}
+
+body.theme-light .acces-btn-icon {
+  background: #fff !important;
+  color: #004884 !important;
+}
+
+body.theme-light .govco-tooltip {
+  background: #3366CC !important;
+  color: #fff !important;
+}
+
+body.theme-light main,
+body.theme-light .main,
+body.theme-light .content,
+body.theme-light .container,
+body.theme-light .card,
+body.theme-light .table {
+  background: #fff !important;
+  color: #222 !important;
+}
+
+body.theme-light .sidebar,
+body.theme-light .menu,
+body.theme-light .app-menu {
+  background: #f8f9fa !important;
+  color: #222 !important;
+}
+
+body.theme-light .header,
+body.theme-light .app-header {
+  background: #fff !important;
+  color: #222 !important;
+}
+
+body.theme-light .table th,
+body.theme-light .table td {
+  background: #fff !important;
+  color: #222 !important;
+}
+
+body.theme-light a {
+  color: #004884 !important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

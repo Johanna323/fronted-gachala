@@ -1,0 +1,76 @@
+<div class="container">
+  <mat-card class="bg-white">
+    <mat-card-header>
+      <mat-card-title>Gestión de Kits de Inventario</mat-card-title>
+      <div class="header-actions" style="margin-left:auto; display:flex; align-items:center;">
+        <button mat-raised-button color="primary" (click)="abrirModalCrear()">
+          <mat-icon>add</mat-icon>
+          Crear Kit
+        </button>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content class="bg-white">
+      <div *ngIf="loading" class="loading-container">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Cargando kits de inventario...</p>
+      </div>
+
+      <div *ngIf="error" class="error-message">
+        {{ error }}
+      </div>
+
+      <table mat-table [dataSource]="kits" *ngIf="!loading" class="mat-elevation-z8 bg-white">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let kit">{{ kit.id }}</td>
+        </ng-container>
+
+        <!-- Nombre Kit Column -->
+        <ng-container matColumnDef="nombre_kit">
+          <th mat-header-cell *matHeaderCellDef>Nombre Kit</th>
+          <td mat-cell *matCellDef="let kit">{{ kit.nombre_kit }}</td>
+        </ng-container>
+
+        <!-- Descripción Column -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef>Descripción</th>
+          <td mat-cell *matCellDef="let kit">{{ kit.descripcion }}</td>
+        </ng-container>
+
+        <!-- Cantidad Disponible Column -->
+        <ng-container matColumnDef="cantidad_disponible">
+          <th mat-header-cell *matHeaderCellDef>Cantidad Disponible</th>
+          <td mat-cell *matCellDef="let kit">{{ kit.cantidad_disponible }}</td>
+        </ng-container>
+
+        <!-- Fecha Actualización Column -->
+        <ng-container matColumnDef="fecha_actualizacion">
+          <th mat-header-cell *matHeaderCellDef>Fecha Actualización</th>
+          <td mat-cell *matCellDef="let kit">{{ kit.fecha_actualizacion | date:'dd/MM/yyyy' }}</td>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let kit; let i = index">
+            <button mat-icon-button color="primary" (click)="abrirModalEditar(i)" matTooltip="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="delete(i)" matTooltip="Eliminar">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <div class="no-data" *ngIf="!loading && kits.length === 0">
+        No hay kits registrados
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div> 

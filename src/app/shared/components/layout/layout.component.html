@@ -1,0 +1,13 @@
+<div class="min-h-screen flex flex-col bg-gray-100">
+  <app-header></app-header>
+  <div class="flex flex-1">
+    <!-- Sidebar -->
+    <app-menu></app-menu>
+    <!-- Main content -->
+    <main class="flex-1 p-8">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  <!-- Accessibility Panel -->
+  <app-accessibility-panel></app-accessibility-panel>
+</div> 

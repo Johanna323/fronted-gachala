@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Asignar Rol</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="roleForm" class="role-form">
+    <div *ngIf="loading" class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Cargando roles...</p>
+    </div>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Seleccionar Rol</mat-label>
+      <mat-select formControlName="role_id">
+        <mat-option *ngFor="let role of roles" [value]="role.id">
+          {{ role.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="roleForm.get('role_id')?.hasError('required')">
+        El rol es requerido
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!roleForm.valid">
+    Asignar
+  </button>
+</mat-dialog-actions>

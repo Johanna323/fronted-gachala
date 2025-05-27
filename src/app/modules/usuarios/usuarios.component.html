@@ -1,0 +1,93 @@
+<div class="container">
+  <mat-card class="bg-white">
+    <mat-card-header>
+      <mat-card-title>Gestión de Usuarios</mat-card-title>
+      <div class="header-actions">
+        <button mat-raised-button color="primary" (click)="abrirModalCrear()">
+          <mat-icon>person_add</mat-icon>
+          Crear Usuario
+        </button>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content class="bg-white">
+      <div *ngIf="loading" class="loading-container">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Cargando usuarios...</p>
+      </div>
+
+      <div *ngIf="error" class="error-message">
+        {{ error }}
+      </div>
+
+      <table mat-table [dataSource]="usuarios" *ngIf="!loading" class="mat-elevation-z8 bg-white">
+        <!-- Nombre Completo Column -->
+        <ng-container matColumnDef="nombre_completo">
+          <th mat-header-cell *matHeaderCellDef>Nombre Completo</th>
+          <td mat-cell *matCellDef="let usuario">
+            {{ usuario.primer_nombre }} {{ usuario.segundo_nombre }} {{ usuario.primer_apellido }} {{ usuario.segundo_apellido }}
+          </td>
+        </ng-container>
+
+        <!-- Correo Column -->
+        <ng-container matColumnDef="correo">
+          <th mat-header-cell *matHeaderCellDef>Correo</th>
+          <td mat-cell *matCellDef="let usuario">{{ usuario.correo }}</td>
+        </ng-container>
+
+        <!-- Documento Column -->
+        <ng-container matColumnDef="documento">
+          <th mat-header-cell *matHeaderCellDef>Documento</th>
+          <td mat-cell *matCellDef="let usuario">
+            {{ usuario.tipo_documento }} {{ usuario.numero_documento }}
+          </td>
+        </ng-container>
+
+        <!-- Teléfono Column -->
+        <ng-container matColumnDef="telefono">
+          <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+          <td mat-cell *matCellDef="let usuario">{{ usuario.telefono }}</td>
+        </ng-container>
+
+        <!-- Rol Column -->
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef>Rol</th>
+          <td mat-cell *matCellDef="let usuario">{{ usuario?.role?.nombre }}</td>
+        </ng-container>
+
+        <!-- Estado Column -->
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let usuario">
+            <mat-chip [color]="usuario.activo ? 'primary' : 'warn'" selected>
+              {{ usuario.activo ? 'Activo' : 'Inactivo' }}
+            </mat-chip>
+          </td>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let usuario; let i = index">
+            <button mat-icon-button color="primary" (click)="abrirModalEditar(i)" matTooltip="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="abrirModalAsignarRol(i)" matTooltip="Asignar Rol">
+              <mat-icon>assignment_ind</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="delete(i)" matTooltip="Eliminar">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <div class="no-data" *ngIf="!loading && usuarios.length === 0">
+        No hay usuarios registrados
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

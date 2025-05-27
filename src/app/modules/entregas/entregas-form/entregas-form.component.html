@@ -1,0 +1,95 @@
+<div class="p-6 w-full max-w-4xl mx-auto">
+  <h2 mat-dialog-title>{{ data?.entrega ? 'Editar' : 'Crear' }} Entrega</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full">
+    <mat-dialog-content class="w-full">
+      <div class="grid grid-cols-2 gap-6 md:grid-cols-2 sm:grid-cols-1 w-full">
+        <!-- Usuario (Beneficiario) Select con búsqueda -->
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Beneficiario</mat-label>
+          <input matInput placeholder="Buscar usuario..." [(ngModel)]="searchUsuario" (ngModelChange)="onSearchUsuario($event)" [ngModelOptions]="{standalone: true}">
+          <mat-select formControlName="beneficiary_id">
+            <mat-option *ngFor="let usuario of filteredBeneficiarios | async" [value]="usuario.id">
+              {{ usuario?.usuario?.primer_nombre }} {{ usuario?.usuario?.primer_apellido }} ({{ usuario?.usuario?.numero_documento }})
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('beneficiary_id')?.hasError('required')">
+            El usuario es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Kit Select -->
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Kit</mat-label>
+          <mat-select formControlName="kit_id">
+            <mat-option *ngFor="let kit of kits" [value]="kit.id">
+              {{ kit.nombre_kit }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('kit_id')?.hasError('required')">
+            El kit es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Sector Select -->
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Sector</mat-label>
+          <mat-select formControlName="sector_id">
+            <mat-option *ngFor="let sector of sectores" [value]="sector.id">
+              {{ sector.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('sector_id')?.hasError('required')">
+            El sector es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Funcionario Select con búsqueda -->
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Funcionario Entrega</mat-label>
+          <input matInput placeholder="Buscar funcionario..." [(ngModel)]="searchFuncionario" (ngModelChange)="onSearchFuncionario($event)" [ngModelOptions]="{standalone: true}">
+          <mat-select formControlName="funcionario_entrega">
+            <mat-option *ngFor="let funcionario of filteredFuncionarios | async" [value]="funcionario.id">
+              {{ funcionario.primer_nombre }} {{ funcionario.primer_apellido }} ({{ funcionario.numero_documento }})
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('funcionario_entrega')?.hasError('required')">
+            El funcionario es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Observaciones -->
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Observaciones</mat-label>
+          <textarea matInput formControlName="observaciones" rows="2"></textarea>
+        </mat-form-field>
+
+        <!-- Estado Select -->
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="estado">
+            <mat-option *ngFor="let estado of estados" [value]="estado.value">
+              {{ estado.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Fecha de Entrega Datepicker -->
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Fecha de Entrega</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fecha_entrega" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="form.get('fecha_entrega')?.hasError('required')">
+            La fecha es requerida
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
+        {{ data?.entrega ? 'Actualizar' : 'Crear' }}
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

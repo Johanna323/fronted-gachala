@@ -1,0 +1,73 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Programa de Mercados Gachalá</h1>
+      <p class="hero-subtitle">Apoyando a las familias de Gachalá con entregas de mercados de calidad</p>
+      <button mat-raised-button color="primary" class="cta-button">
+        <mat-icon>shopping_cart</mat-icon>
+        Ver Beneficiarios
+      </button>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <mat-card *ngFor="let stat of stats" class="stat-card">
+        <mat-icon class="stat-icon">{{stat.icon}}</mat-icon>
+        <h3>{{stat.value}}</h3>
+        <p>{{stat.title}}</p>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <mat-card class="about-card">
+      <h2>Nuestro Compromiso con Gachalá</h2>
+      <p>
+        En el municipio de Gachalá, ubicado en el departamento de Cundinamarca, 
+        trabajamos incansablemente para garantizar que las familias más vulnerables 
+        reciban sus mercados de manera oportuna y con la mejor calidad. Nuestro 
+        programa de entrega de mercados es una iniciativa que busca mejorar la 
+        seguridad alimentaria de la comunidad.
+      </p>
+      <mat-divider class="divider"></mat-divider>
+      <div class="features-grid">
+        <div *ngFor="let feature of features" class="feature-item">
+          <mat-icon class="feature-icon">{{feature.icon}}</mat-icon>
+          <h3>{{feature.title}}</h3>
+          <p>{{feature.description}}</p>
+        </div>
+      </div>
+    </mat-card>
+  </section>
+
+  <!-- Impact Section -->
+  <section class="impact-section">
+    <mat-card class="impact-card">
+      <h2>Nuestro Impacto</h2>
+      <div class="impact-content">
+        <div class="impact-text">
+          <p>
+            El programa de mercados en Gachalá ha logrado un impacto significativo 
+            en la comunidad, beneficiando a más de 1,200 familias mensualmente. 
+            Nuestro compromiso con la transparencia y la eficiencia nos ha permitido 
+            establecer un sistema de entrega que garantiza que cada beneficiario 
+            reciba su mercado completo y en óptimas condiciones.
+          </p>
+          <ul class="impact-list">
+            <li>Entrega mensual de mercados completos</li>
+            <li>Productos frescos y de calidad</li>
+            <li>Atención personalizada a cada beneficiario</li>
+            <li>Proceso transparente y verificable</li>
+          </ul>
+        </div>
+        <div class="impact-image">
+          <img src="./assets/images/banner_mercado.jpg" alt="Mercado Gachalá" class="impact-img">
+        </div>
+      </div>
+    </mat-card>
+  </section>
+</div>
